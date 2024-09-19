@@ -18,6 +18,9 @@ int cul(int a){
 	for(i=1;i<=a;i++){
 		if(a%i==0)c=c+1;
 	}
-	if(c==2)return 1;
+	if(c==2){
+		printf("%d",c);
+		return 1;
+	}
 	else return 0;
 }
