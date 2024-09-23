@@ -1,20 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 int main() {
-	char a='A';
-	int num=356;
+	int num1=100,num2=100;
 	
-	char *ptr1=&a;
-	int *ptr2=&num;
+	int *pnum;
 	
-	printf("%x\n",ptr1);
-	printf("%x\n",ptr2); 
+	pnum=&num1;
+	(*pnum)+=30;
 	
-	printf("%c\n",*ptr1);
-	printf("%d\n",*ptr2);
+	pnum=&num2;
+	(*pnum)-=30;
 	
+	printf("%d\n",num1);
+	printf("%d\n",num2);
 	return 0;
 }
