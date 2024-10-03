@@ -5,7 +5,7 @@
 
 int main() {
 	int i,n,j,a,b;
-	printf("피라미드 층 수 입력 : ");
+	printf("CC¶o¹Iμa Aþ ¼o AO·A : ");
 	scanf_s("%d",&n);
 	b=n-1;
 	n+=3;
