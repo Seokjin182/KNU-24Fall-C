@@ -10,15 +10,15 @@ int main() {
 	b=n-1;
 	n+=3;
 	for(i=0;i<n;i++){
-		for(a=0;a<=b;a++){
-			printf(" ");
+		for(a=0;a<b;a++){
+			if(i%2==0)printf(" ");
 		}
 		
 		for(j=0;j<=i;j++){
 			if(i%2==0)printf("*");
 		}
 		if(i%2==0)printf("\n");
-		b-=1;
+	 if(i%2==0)b-=1;
 	}
 	return 0;
 }
