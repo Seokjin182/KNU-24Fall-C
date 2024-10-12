@@ -5,20 +5,16 @@
 
 int main() {
 	int i,n,j,a,b;
-	printf("CC¶o¹Iμa Aþ ¼o AO·A : ");
+	printf("층 수를 입력하시오 : ");
 	scanf_s("%d",&n);
-	b=n-1;
-	n+=3;
-	for(i=0;i<n;i++){
-		for(a=0;a<b;a++){
-			if(i%2==0)printf(" ");
-		}
-		
-		for(j=0;j<=i;j++){
-			if(i%2==0)printf("*");
-		}
-		if(i%2==0)printf("\n");
-	 if(i%2==0)b-=1;
+	for(i=1;i<=n;i++){
+			for(a=1;a<=n-i;a++){
+				printf(" ");
+			}
+			for(j=1;j<=2*i-1;j++){
+				printf("*");
+			}
+			printf("\n");
 	}
 	return 0;
 }

@@ -19,16 +19,15 @@ int main(){
 		}
 		if(count%1000000==0){
 			printf("현재 진행 상황%d%% pi=%f",(count/1000000),(cir/count)*4);
-			if(count%5000000==0){
-				a++;
-			}
-			for(i=0;i<=a;i++){
-					printf("*");	
+			if(count%5000000==0)a++;
+			if(a==20)printf("********************");
+			else{
+				for(i=0;i<=a;i++){
+					printf("*");
+				}
 			}
 			printf("\n");
 		}
-		
 	}
-	
 	return 0;
 }
