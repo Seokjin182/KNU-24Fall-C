@@ -17,7 +17,7 @@ struct NODE* create_node(int data){
 
 struct NODE* last_node(){
 	struct NODE* cur=head;
-	while(cue->link != NULL){
+	while(cur->link != NULL){
 		cur=cur->link;
 	}
 	return cur;
