@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void rev(char* str) {
+void rev(char *str) {
 	int i;
 	char tmp;
-	char* start = str;
-	char* end = str + strlen(str) - 1;
+	char *start = str;
+	char *end = str + strlen(str) - 1;
 	for (i = 0; i < strlen(str)/2; i++) {
 		tmp = *start;
 		*start = *end;
