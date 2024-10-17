@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void reverse_string(char* str) {
+void rev(char* str) {
 	int i;
 	char tmp;
 	char* start = str;
@@ -21,6 +21,6 @@ int main() {
 	printf("문자열을 입력하세요 : ");
 	scanf_s("%s", &str, 10);
 	
-	reverse_string(str);
+	rev(str);
 	printf("%s", str);
 }
