@@ -1,16 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-
-int isAlphabet(char* str) {
-	int i;
-	for (i = 0; i < strlen(str); i++) {
-		char cur = *(str + i);
-		if (!((cur >= 65 && cur <= 90) || (cur >= 97 && cur <= 122))) return 0;
-	}
-	return 1;
-}
-
 void reverse_string(char* str) {
 	int i;
 	char tmp;
@@ -27,10 +17,10 @@ void reverse_string(char* str) {
 
 int main() {
 	char str[10];
-	do {
-		printf("문자열을 입력하세요 : ");
-		scanf_s("%s", &str, 10);
-	} while (!isAlphabet(str));
+	
+	printf("문자열을 입력하세요 : ");
+	scanf_s("%s", &str, 10);
+	
 	reverse_string(str);
 	printf("%s", str);
 }
