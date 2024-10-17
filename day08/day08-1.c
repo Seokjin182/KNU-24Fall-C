@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
 
 void rev(char* str) {
 	int i;
@@ -17,10 +17,8 @@ void rev(char* str) {
 
 int main() {
 	char str[10];
-	
 	printf("문자열을 입력하세요 : ");
 	scanf_s("%s", &str, 10);
-	
 	rev(str);
 	printf("%s", str);
 }
