@@ -26,7 +26,6 @@ void fill(int arr[SIZE][SIZE]){
 		}
 		printf("\n");
 	}
-	
 }
 
 void print(int arr[SIZE][SIZE]){
@@ -41,7 +40,6 @@ void print(int arr[SIZE][SIZE]){
 			n++;
 		}
 		if(y%10==0){
-			printf("%d\n",y);
 			i=i+(y%10);
 		}
 		while(y>9){
