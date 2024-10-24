@@ -15,7 +15,7 @@ int main() {
 		scanf_s("%d %d %d",&v.x[0],&v.y[0],&v.z[0]);
 		printf("두번째 백터 x ,y, z	");
 		scanf_s("%d %d %d",&v.x[1],&v.y[1],&v.z[1]);
-		printf("1.백터의 합 \n 2.백터의 차\n 3.백터의 내적\n 4.백터의 외적\n5.종료");
+		printf("1.백터의 합 \n 2.백터의 차\n 3.백터의 내적\n 4.백터의 외적\n5.종료\n");
 		scanf_s("%d",&a);
 		if(a==1){
 			xf=v.x[0]+v.x[1];
@@ -43,7 +43,7 @@ int main() {
 			printf("x = %d y = %d z = %d\n",xf,yf,zf);
 		}
 		if(a==5){
-			printf("다시 입력\n");
+			printf(" 종료\n");
 			break;
 		}
 		if(a<0||a>5){
