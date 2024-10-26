@@ -17,13 +17,14 @@ int main() {
 		
 		printf("상품명 ");
 		scanf_s("%s",item[i].name);
-		
+		re:
 		printf("가격 ");
 		scanf_s("%d",&item[i].value);
+		if(item[i].value<=0)goto re;
 	}
 	i=0;
 	while(item[i].id!=NULL&&i<=4){
-		printf(" 상품id %d \n 상품명 %s \n 가격 %d \n",item[i].id,item[i].name,item[i].value);
+		printf("상품id %d \n상품명 %s \n가격 %d \n",item[i].id,item[i].name,item[i].value);
 		i++;
 	}
 	return 0;
