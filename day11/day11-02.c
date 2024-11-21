@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-float function(float x) {
+float f(float x) {
     return log10(x) + sin(x);
 }
 
@@ -12,7 +12,7 @@ float rec(float start, float end, int inte) {
 
     for (i = 0; i < inte; i++) {
         float x = start + i * h; 
-        integral += function(x) * h; 
+        integral += f(x) * h; 
     }
 
     return integral;
