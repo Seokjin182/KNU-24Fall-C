@@ -58,10 +58,6 @@ int main() {
 
 struct Node* createNode(char* name, int score) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-    if (newNode == NULL) {
-        printf("메모리 할당 실패\n");
-        exit(1);
-    }
     strcpy(newNode->name, name);
     newNode->score = score;
     newNode->next = NULL;
