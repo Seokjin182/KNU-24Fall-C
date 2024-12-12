@@ -2,13 +2,15 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <time.h>
-#include <Windows.h> // Windows 전용
+#include <Windows.h>
 
 int i, j, k; // 반복문 변수 선언
 int height = 20, width = 20;
 int gameover, score;
-int x, y, fruitx, fruity, poisonx, poisony, flag;
-
+int x, y, fruitx, fruity, poisonx, poisony, flag,wall2y,wall2x,wall2Active;
+int secondWallCreated = 0; // 두 번째 벽 생성 여부
+int secondWallX, secondWallY; // 두 번째 벽 좌표
+    
 // 꼬리 좌표 저장 배열 및 길이
 int tailX[100], tailY[100];
 int tailLength = 0;
@@ -24,14 +26,22 @@ void setup() {
     x = height / 2;
     y = width / 2;
 
-    fruitx = 1 + rand() % (height - 2);
-    fruity = 1 + rand() % (width - 2);
+    // 과일의 초기 위치 설정
+    do {
+        fruitx = 1 + rand() % (height - 2);
+        fruity = 1 + rand() % (width - 2);
+    } while (isSnake(fruitx, fruity));
 
-    wallx = fruitx - 1; // 초기 특수 벽 위치
+    // 특수 벽 초기화
+    wallx = fruitx - 1;
     wally = fruity;
 
-    poisonx = 1 + rand() % (height - 2);
-    poisony = 1 + rand() % (width - 2);
+
+    // 독사과 초기 위치 설정
+    do {
+        poisonx = 1 + rand() % (height - 2);
+        poisony = 1 + rand() % (width - 2);
+    } while (isSnake(poisonx, poisony));
 
     score = 0;
     tailLength = 0; // 초기 꼬리 길이
@@ -46,7 +56,9 @@ void draw() {
             } else if (i == x && j == y) {
                 printf("0");
             } else if (i == wallx && j == wally) {
-                printf("X"); // 특수 벽
+                printf("X"); // 첫 번째 특수 벽
+            } else if (i == secondWallX && j == secondWallY) {
+                printf("X"); // 두 번째 특수 벽
             } else {
                 int isTail = 0;
                 for (k = 0; k < tailLength; k++) {
@@ -83,6 +95,15 @@ void input() {
             case 'x': gameover = 1; break; // 종료
         }
     }
+}
+
+int isSnake(int fx, int fy) {
+    int k;
+	if (fx == x && fy == y) return 1; // 머리와 겹침
+    for (k = 0; k < tailLength; k++) {
+        if (tailX[k] == fx && tailY[k] == fy) return 1;
+    }
+    return 0;
 }
 
 void logic() {
@@ -125,43 +146,58 @@ void logic() {
 
     // 과일을 먹으면 점수 증가 및 꼬리 길이 증가
     if (x == fruitx && y == fruity) {
-        fruitx = 1 + rand() % (height - 2);
-        fruity = 1 + rand() % (width - 2);
+        do {
+            fruitx = 1 + rand() % (height - 2);
+            fruity = 1 + rand() % (width - 2);
+        } while (isSnake(fruitx, fruity));
 
-        // 새로운 특수 벽 위치 설정
+        // 첫 번째 벽 위치 업데이트
         wallx = fruitx - 1;
         wally = fruity;
 
-        // 벽 타이머 시작
-        wallTimerActive = 1;
-        wallTimerStart = GetTickCount();
-
-        poisonx = 1 + rand() % (height - 2);
-        poisony = 1 + rand() % (width - 2);
+        do {
+            poisonx = 1 + rand() % (height - 2);
+            poisony = 1 + rand() % (width - 2);
+        } while (isSnake(poisonx, poisony));
 
         score += 10;
         tailLength++;
+
+        // 두 번째 벽 생성 조건 (과일을 먹은 후에만 생성)
+        static int secondWallCreated = 0; // 두 번째 벽 생성 여부
+        if (!secondWallCreated&&score>=50) {
+            // 두 번째 벽이 아직 생성되지 않았다면 과일을 먹었을 때 생성
+            do {
+                secondWallX = 1 + rand() % (height - 2); // 랜덤 X 좌표
+                secondWallY = 1 + rand() % (width - 2); // 랜덤 Y 좌표
+            } while ((secondWallX == x && secondWallY == y) || isSnake(secondWallX, secondWallY) || (secondWallX == wallx && secondWallY == wally));
+
+            secondWallCreated = 1; // 두 번째 벽 생성 완료
+        }
     }
 
     // 독사과를 먹으면 꼬리 길이 감소
     if (x == poisonx && y == poisony) {
-        // 꼬리가 하나만 남아 있을 때 독사과를 먹으면 게임 종료
         if (tailLength == 0) {
             gameover = 1;
         } else {
             tailLength--;
         }
 
-        poisonx = 1 + rand() % (height - 2);
-        poisony = 1 + rand() % (width - 2);
+        do {
+            poisonx = 1 + rand() % (height - 2);
+            poisony = 1 + rand() % (width - 2);
+        } while (isSnake(poisonx, poisony));
     }
 
-    // 특수 벽과 충돌 시 게임 종료
-    if (x == wallx && y == wally) {
+    // 첫 번째 벽 또는 두 번째 벽과 충돌 시 게임 종료
+    if ((x == wallx && y == wally) || (x == secondWallX && y == secondWallY)) {
         gameover = 1;
     }
-
 }
+
+
+
 
 int main() {
     setup();
